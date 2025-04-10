@@ -1,4 +1,4 @@
-const db = require("../models");
+const db = require("../models").Personal;
 
 const getAllAssignedPersonal = async (req, res) => {
     try {
@@ -24,10 +24,11 @@ const getAssignedPersonalById = async (req, res) => {
 
 const createAssignedPersonal = async (req, res) => {
     try {
-        const newAssignedPersonal = await db.AssignedPersonal.create(req.body);
+        const { assignedObject, employeeId, assignedDate } = req.body;
+        const newAssignedPersonal = await db.create({assignedObject, employeeId, assignedDate });
         res.status(201).json(newAssignedPersonal);
-    } catch (err) {
-        res.status(500).json({ message: "Server Error", error: err.message });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
     }
 };
 

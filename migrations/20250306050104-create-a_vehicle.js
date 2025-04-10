@@ -9,22 +9,36 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      a_objId: {
-        type: Sequelize.INTEGER
+      a_objId: { // Foreign key reference to A_Objective
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'A_Objectives', // Reference the A_Objectives table
+          key: 'id',
+        },
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
       },
       vehicleId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Vehicles', // Reference to Vehicles table
+          key: 'id',
+        },
+        onDelete: 'CASCADE',  // It's good practice to add CASCADE here as well
+        onUpdate: 'CASCADE',
       },
       assignedDate: {
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.NOW,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.NOW,
       }
     });
   },

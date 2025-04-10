@@ -25,6 +25,7 @@ module.exports = (sequelize, DataTypes) => {
       email: {
         type: DataTypes.STRING,
         allowNull: true,
+        unique: true,
       },
     },
     {
@@ -36,7 +37,7 @@ module.exports = (sequelize, DataTypes) => {
   Company.associate = (models) => {
     Company.hasMany(models.User, {
       foreignKey: "companyId",
-      as: "users",
+      as: "users", // Alias for easier querying
       onDelete: "CASCADE",
       onUpdate: "CASCADE",
     });

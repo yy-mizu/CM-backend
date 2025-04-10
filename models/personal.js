@@ -1,25 +1,42 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class Personal extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
-      // define association here
+      // Personal belongs to Employee
+      Personal.belongsTo(models.Employee, {
+        foreignKey: 'employeeId',
+        as: 'employee',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
+      });
+
+      Personal.belongsTo(models.A_Objective, {
+        foreignKey: 'assignedObject', // Foreign key reference to A_Objective
+        as: 'objective',              // Alias for the relation
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
+      });
     }
   }
-  Personal.init({
-    assignedObject: DataTypes.INTEGER,
-    empoyeesId: DataTypes.INTEGER,
-    assignedDate: DataTypes.DATE
-  }, {
-    sequelize,
-    modelName: 'Personal',
-  });
+
+  Personal.init(
+    {
+      assignedObject: DataTypes.INTEGER,
+      employeeId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      assignedDate: DataTypes.DATE,
+    },
+    {
+      sequelize,
+      modelName: 'Personal',
+      tableName: 'Personals',
+      timestamps: true,
+    }
+  );
+
   return Personal;
 };

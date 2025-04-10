@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const TeamController = require('../controller/teamController');
+const TeamController = require('../controllers/teamController');
 
 router.get('/list', TeamController.getAllTeam);  // Get all users
 router.get('/:id', TeamController.getTeamById);  // Get a single user by ID

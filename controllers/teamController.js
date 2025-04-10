@@ -28,7 +28,7 @@ const getTeamById = async (req, res) => {
 
 const createTeam = async (req, res) => {
     try {
-        const existingTeam = await db.findOne({ where: { name: req.body.name } });
+        const existingTeam = await db.findOne({ where: { teamName: req.body.teamName } });
         if (existingTeam) {
             return res.status(400).json({ message: "Team already exists" });
         }

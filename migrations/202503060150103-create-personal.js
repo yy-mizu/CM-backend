@@ -10,21 +10,38 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       assignedObject: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'A_objectives', 
+          key: 'id',
+        },
+        
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
       },
-      empoyeesId: {
-        type: Sequelize.INTEGER
+      
+      employeeId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Employees', 
+          key: 'id',
+        },
+        
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
       },
       assignedDate: {
         type: Sequelize.DATE
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.NOW,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.NOW,
       }
     });
   },

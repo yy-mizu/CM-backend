@@ -1,72 +1,69 @@
-const db = require("../models").Employees;
+const db = require("../models").Employee;
 
-
-const getAllEmployees= async (req, res) => {
+// GET all employees
+const getAllEmployees = async (req, res) => {
     try {
-        const company = await db.findAll();
-        if (companies.length > 0) {
-            res.status(200).json(users);
+        const employees = await db.findAll();
+        if (employees.length > 0) {
+            res.status(200).json(employees);
         } else {
-            res.status(404).json({ message: "No Company found" });
+            res.status(404).json({ message: "No employees found" });
         }
     } catch (err) {
         res.status(500).json({ message: "Server Error", error: err.message });
     }
 };
 
-
+// GET employee by ID
 const getEmployeesById = async (req, res) => {
     try {
-        const company = await db.findOne({ where: { id: req.params.id } });
-        if (company) {
-            res.status(200).json(company);
+        const employee = await db.findOne({ where: { id: req.params.id } });
+        if (employee) {
+            res.status(200).json(employee);
         } else {
-            res.status(404).json({ message: "Company Not Found" });
+            res.status(404).json({ message: "Employee not found" });
         }
     } catch (err) {
         res.status(500).json({ message: "Server Error", error: err.message });
     }
 };
 
-
-const createEmployees= async (req, res) => {
+// CREATE new employee
+const createEmployees = async (req, res) => {
     try {
-        const existingCompany = await db.findOne({ where: { name: req.body.name } });
-        if (existingCompany) {
-            return res.status(400).json({ message: "Company already exists" });
-        }
-
-        const newCompany = await db.create(req.body);
-        res.status(201).json(newCompany);
-    } catch (err) {
-        res.status(500).json({ message: "Server Error", error: err.message });
+        const { name, email, phoneNumber, role, displayName, teamid, status } = req.body;
+        const newEmployee = await db.create({ name, email, phoneNumber, role, displayName, teamid, status });
+        res.status(201).json(newEmployee);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
     }
 };
 
+// UPDATE employee by ID
 const updateEmployees = async (req, res) => {
     try {
-        const company = await db.findOne({ where: { id: req.params.id } });
-        if (!company) {
-            return res.status(404).json({ message: "Company Not Found" });
+        const employee = await db.findOne({ where: { id: req.params.id } });
+        if (!employee) {
+            return res.status(404).json({ message: "Employee not found" });
         }
 
         await db.update(req.body, { where: { id: req.params.id } });
-        res.status(200).json({ message: "Company Updated Successfully" });
+        res.status(200).json({ message: "Employee updated successfully" });
     } catch (err) {
         res.status(500).json({ message: "Server Error", error: err.message });
     }
 };
 
-
+// DELETE employee by ID
 const deleteEmployees = async (req, res) => {
     try {
-        const company = await db.findOne({ where: { id: req.params.id } });
-        if (!company) {
-            return res.status(404).json({ message: "Company Not Found" });
+        const employee = await db.findOne({ where: { id: req.params.id } });
+        if (!employee) {
+            return res.status(404).json({ message: "Employee not found" });
         }
 
         await db.destroy({ where: { id: req.params.id } });
-        res.status(200).json({ message: "Company Deleted Successfully" });
+        res.status(200).json({ message: "Employee deleted successfully" });
     } catch (err) {
         res.status(500).json({ message: "Server Error", error: err.message });
     }
@@ -77,5 +74,5 @@ module.exports = {
     getEmployeesById,
     createEmployees,
     updateEmployees,
-    deleteEmployees
+    deleteEmployees,
 };

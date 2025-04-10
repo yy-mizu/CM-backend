@@ -1,6 +1,6 @@
-const db = require("../models").A_Objective;
+const db = require("../models").A_Vehicle;
 
-const getAllA_Objective = async (req, res) => {
+const getAllA_Vehicle = async (req, res) => {
     try {
         const a_objectives = await db.findAll();
         if (a_objectives.length > 0) {
@@ -13,7 +13,7 @@ const getAllA_Objective = async (req, res) => {
     }
 };
 
-const getA_ObjectiveById = async (req, res) => {
+const getA_VehicleById = async (req, res) => {
     try {
         const a_objective = await db.findOne({ where: { id: req.params.id } });
         if (a_objective) {
@@ -26,17 +26,17 @@ const getA_ObjectiveById = async (req, res) => {
     }
 };
 
-const createA_Objective = async (req, res) => {
+const createA_Vehicle= async (req, res) => {
     try {
-        const { projectId, objectiveId, startDate, endDate } = req.body;
-        const newA_Objective = await db.create({ projectId, objectiveId, startDate, endDate});
-        res.status(201).json(newA_Objective);
+        const { a_objId, vehicleId, assignedDate } = req.body;
+        const newA_Vehicle = await db.create({ a_objId, vehicleId, assignedDate});
+        res.status(201).json(newA_Vehicle);
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
 };
 
-const updateA_Objective = async (req, res) => {
+const updateA_Vehicle = async (req, res) => {
     try {
         const a_objective = await db.findOne({ where: { id: req.params.id } });
         if (!a_objective) {
@@ -50,7 +50,7 @@ const updateA_Objective = async (req, res) => {
     }
 };
 
-const deleteA_Objective = async (req, res) => {
+const deleteA_Vehicle = async (req, res) => {
     try {
         const a_objective = await db.findOne({ where: { id: req.params.id } });
         if (!a_objective) {
@@ -65,9 +65,9 @@ const deleteA_Objective = async (req, res) => {
 };
 
 module.exports = {
-    getAllA_Objective,
-    getA_ObjectiveById,
-    createA_Objective,
-    updateA_Objective,
-    deleteA_Objective
+    getAllA_Vehicle,
+    getA_VehicleById,
+    createA_Vehicle,
+    updateA_Vehicle,
+    deleteA_Vehicle
 };

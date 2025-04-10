@@ -2,12 +2,12 @@ const { User, Company } = require("../models");
 
 const createUser = async (req, res) => {
   try {
-    const { name, email, phoneNumber, companyId } = req.body;
+    const { name, email, phoneNumber, companyId ,password } = req.body;
 
     const company = await Company.findByPk(companyId);
-    if (!company) return res.status(404).json({ error: "Company not found" });
+    if (!company) return res.status(404).json({ error: "User not found" });
 
-    const user = await User.create({ name, email, phoneNumber, companyId });
+    const user = await User.create({ name, email, phoneNumber, companyId , password });
     res.status(201).json(user);
   } catch (error) {
     res.status(500).json({ error: error.message });

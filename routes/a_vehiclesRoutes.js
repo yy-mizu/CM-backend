@@ -1,11 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const AController = require("../controllers/a_objectiveController");
+const A_vehicleController = require("../controllers/a_vehicleController");
 
-router.get("/", objectiveController.getAllObjective);
-router.get("/:id", objectiveController.getObjectivelById);
-router.post("/", objectiveController.createObjective);
-router.put("/:id", objectiveController.updateObjective);
-router.delete("/:id", objectiveController.deleteObjective);
+router.get("/list", A_vehicleController.getAllA_Vehicle);
+router.get("/list/:id", A_vehicleController.getA_VehicleById);
+router.post("/create", A_vehicleController.createA_Vehicle);
+router.put("/edit/:id", A_vehicleController.updateA_Vehicle);
+router.delete("/delete/:id", A_vehicleController.deleteA_Vehicle);
 
 module.exports = router;

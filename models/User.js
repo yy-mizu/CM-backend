@@ -3,7 +3,7 @@
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define(
     "User",
-    {
+      {
       id: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -26,6 +26,10 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
+      password: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
     },
     {
       tableName: "Users",
@@ -37,6 +41,13 @@ module.exports = (sequelize, DataTypes) => {
     User.belongsTo(models.Company, {
       foreignKey: "companyId",
       as: "company",
+      onDelete: "CASCADE",
+      onUpdate: "CASCADE",
+    });
+
+    User.hasMany(models.Project, {
+      foreignKey: "userId",
+      as: "projects",
       onDelete: "CASCADE",
       onUpdate: "CASCADE",
     });
