@@ -17,6 +17,9 @@ const objectiveROutes = require("./routes/objectiveRoutes");
 
 // Middleware
 app.use(express.json());
+const cors = require("cors");
+app.use(cors());
+
 
 // Route definitions
 app.use("/api/users", userRoutes);

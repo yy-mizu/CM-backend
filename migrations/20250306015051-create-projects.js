@@ -36,7 +36,19 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: true,
       },
-      address: {
+      business_pertaner:{
+        type: Sequelize.DATE,
+        allowNull: true,
+      },
+      customer_representative:{
+        type: Sequelize.DATE,
+        allowNull: true,
+      },
+      staff_name:{
+        type: Sequelize.DATE,
+        allowNull: true,
+      },
+      site_address: {
         type: Sequelize.STRING,
         allowNull: true,
       },

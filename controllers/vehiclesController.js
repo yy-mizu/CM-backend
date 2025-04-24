@@ -2,8 +2,12 @@ const db = require("../models").Vehicles;
 
 const getAllVehicles = async (req, res) => {
     try {
-        const vehicles = await db.vehicles.findAll();
-        res.status(200).json(vehicles);
+        const vehicles = await db.findAll();
+        if (vehicles.length > 0) {
+            res.status(200).json(vehicles);
+        } else {
+            res.status(404).json({ message: "No employees found" });
+        }
     } catch (err) {
         res.status(500).json({ message: "Server Error", error: err.message });
     }

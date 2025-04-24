@@ -28,9 +28,30 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
-      startDate: DataTypes.DATE,
-      endDate: DataTypes.DATE,
-      address: DataTypes.STRING,
+      startDate: {
+        type: DataTypes.DATEONLY,
+        allowNull: false,
+      },
+      endDate: {
+        type: DataTypes.DATEONLY,
+        allowNull: false,
+      },
+      business_partner: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      customer_representative: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      staff_name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      site_address: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
     },
     {
       sequelize,
@@ -38,8 +59,8 @@ module.exports = (sequelize, DataTypes) => {
       tableName: "Projects",
       timestamps: true,
     }
-    
   );
+  
 
   Project.associate = (models) => {
     // Project has many A_Objectives
